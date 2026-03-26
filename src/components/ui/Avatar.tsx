@@ -4,7 +4,9 @@ import { StyleSheet } from 'react-native';
 const Avatar = ({ avatarUrl }: { avatarUrl?: string }) => {
   return (
     <Image
-      source={{ uri: avatarUrl || 'https://www.filmaffinity.com/es/name.php?name-id=411255817' }}
+      source={{
+        uri: avatarUrl || 'https://pics.filmaffinity.com/nicolas_cage-104136739930377-nm_large.jpg',
+      }}
       style={styles.image}
     />
   );
