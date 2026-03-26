@@ -1,6 +1,7 @@
 import { Colors, Spacing } from '@/constants/theme';
+import { useRouter } from 'expo-router';
 import { memo, useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type BodyScoreMarkerProps = {
   label: string;
@@ -15,9 +16,15 @@ function getScoreColor(score: number) {
 
 function BodyScoreMarkerBase({ label, score }: BodyScoreMarkerProps) {
   const fillColor = useMemo(() => getScoreColor(score), [score]);
+  const router = useRouter();
+
+  const onPress = () => {
+    console.log('onPress', label, score);
+    router.push(`/body-score-detail/${label.toLowerCase()}`);
+  };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.labelContainer}>
         <Text style={styles.label} numberOfLines={1}>
           {label}
@@ -29,7 +36,7 @@ function BodyScoreMarkerBase({ label, score }: BodyScoreMarkerProps) {
         <View style={styles.track} />
         <View style={[styles.fill, { width: `${score}%`, backgroundColor: fillColor }]} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

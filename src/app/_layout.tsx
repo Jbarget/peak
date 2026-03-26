@@ -15,6 +15,14 @@ const queryClient = new QueryClient({
   },
 });
 
+function formatBodyScoreTitle(typeParam: unknown) {
+  const type =
+    typeof typeParam === 'string' ? typeParam : Array.isArray(typeParam) ? typeParam[0] : undefined;
+
+  if (!type) return 'Deep Dive';
+  return `${type.charAt(0).toUpperCase()}${type.slice(1)} Deep Dive`;
+}
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   return (
@@ -23,6 +31,17 @@ export default function TabLayout() {
         <AnimatedSplashOverlay />
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="body-score-detail/[type]"
+            options={({ route }) => ({
+              title: formatBodyScoreTitle(
+                (route.params as { type?: string | string[] } | undefined)?.type,
+              ),
+              headerBackButtonDisplayMode: 'minimal',
+              headerShadowVisible: false,
+              elevation: 0,
+            })}
+          />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>

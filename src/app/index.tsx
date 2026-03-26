@@ -4,9 +4,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BodyScores from '@/components/dashboard/BodyScores';
 import Header from '@/components/dashboard/Header';
 import HealthSummary from '@/components/dashboard/HealthSummary';
+import LifetimeDiseaseRisk from '@/components/dashboard/LifetimeDiseaseRisk';
 import { BottomTabInset, Colors, Spacing } from '@/constants/theme';
-import { useUser } from '@/hooks/useUser';
-import { useUserBodyScores } from '@/hooks/useUserBodyScores';
+import { useUser } from '@/hooks/api/useUser';
+import { useUserBodyScores } from '@/hooks/api/useUserBodyScores';
 
 export default function HomeScreen() {
   const { data: userData } = useUser('user-1');
@@ -21,6 +22,7 @@ export default function HomeScreen() {
       </View>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
         <BodyScores bodyScores={bodyScoresData?.data} />
+        <LifetimeDiseaseRisk />
       </ScrollView>
     </View>
   );

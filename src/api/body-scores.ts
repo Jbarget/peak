@@ -11,8 +11,7 @@ export type BodyScoreCategory =
   | 'immunity'
   | 'skin'
   | 'bones'
-  | 'gut'
-  | (string & {});
+  | 'gut';
 
 export type BodyScore = {
   category: BodyScoreCategory;
