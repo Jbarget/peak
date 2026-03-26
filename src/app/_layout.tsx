@@ -39,8 +39,15 @@ export default function TabLayout() {
               ),
               headerBackButtonDisplayMode: 'minimal',
               headerShadowVisible: false,
-              elevation: 0,
             })}
+          />
+          <Stack.Screen
+            name="wearables-summary"
+            options={{
+              title: 'My Wearables',
+              headerBackButtonDisplayMode: 'minimal',
+              headerShadowVisible: false,
+            }}
           />
         </Stack>
       </ThemeProvider>

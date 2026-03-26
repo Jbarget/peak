@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import BodyScores from '@/components/dashboard/BodyScores';
@@ -8,11 +8,13 @@ import LifetimeDiseaseRisk from '@/components/dashboard/LifetimeDiseaseRisk';
 import { BottomTabInset, Colors, Spacing } from '@/constants/theme';
 import { useUser } from '@/hooks/api/useUser';
 import { useUserBodyScores } from '@/hooks/api/useUserBodyScores';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const { data: userData } = useUser('user-1');
   const { data: bodyScoresData } = useUserBodyScores('user-1');
   const { top } = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
     <View style={[styles.container, { paddingTop: top }]}>
@@ -22,6 +24,11 @@ export default function HomeScreen() {
       </View>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
         <BodyScores bodyScores={bodyScoresData?.data} />
+        <View>
+          <TouchableOpacity onPress={() => router.push('/wearables-summary')}>
+            <Text>Wearables Summary</Text>
+          </TouchableOpacity>
+        </View>
         <LifetimeDiseaseRisk />
       </ScrollView>
     </View>
