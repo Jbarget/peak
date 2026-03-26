@@ -33,11 +33,18 @@ export function BiomarkerRangeRow({ biomarker, description }: Props) {
   const scale = getBarScale(biomarker.ranges);
 
   const improveLeft = pos(biomarker.ranges.improve.min, scale);
-  const improveRight = pos(biomarker.ranges.improve.max, scale);
+  let improveRight = pos(biomarker.ranges.improve.max, scale);
   const goodLeft = pos(biomarker.ranges.good.min, scale);
   const goodRight = pos(biomarker.ranges.good.max, scale);
   const optimalLeft = pos(biomarker.ranges.optimal.min, scale);
   const optimalRight = pos(biomarker.ranges.optimal.max, scale);
+
+  // Some biomarkers have ranges with small gaps (e.g. improve.max=7, good.min=8).
+  // Visually we want continuous bands, so "stitch" adjacent edges to remove gaps.
+  if (goodLeft > improveRight) improveRight = goodLeft;
+
+  let goodRightStitched = goodRight;
+  if (optimalLeft > goodRightStitched) goodRightStitched = optimalLeft;
 
   const valuePos = pos(biomarker.value, scale);
 
@@ -67,7 +74,7 @@ export function BiomarkerRangeRow({ biomarker, description }: Props) {
               styles.bandGood,
               {
                 left: `${goodLeft * 100}%`,
-                width: `${Math.max(0, (goodRight - goodLeft) * 100)}%`,
+                width: `${Math.max(0, (goodRightStitched - goodLeft) * 100)}%`,
               },
             ]}
           />
