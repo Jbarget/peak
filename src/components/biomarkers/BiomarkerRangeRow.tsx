@@ -22,7 +22,7 @@ function getBarScale(ranges: Biomarker['ranges']) {
   // Use the widest band as the scale (improve is the "outer" bounds in our API)
   const min = Math.min(ranges.improve.min, ranges.good.min, ranges.optimal.min);
   const max = Math.max(ranges.improve.max, ranges.good.max, ranges.optimal.max);
-  return { min, max: Math.max(max, min + 1) };
+  return { min, max };
 }
 
 function pos(value: number, scale: { min: number; max: number }) {

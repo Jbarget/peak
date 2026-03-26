@@ -1,5 +1,5 @@
 import { GetUserBodyScoresResponse } from '@/api/body-scores';
-import { Colors, Spacing } from '@/constants/theme';
+import { Colors } from '@/constants/theme';
 import { StyleSheet, Text, View } from 'react-native';
 
 const calculateAgeDifference = (biologicalAge?: number, chronologicalAge?: number) => {
@@ -15,7 +15,7 @@ const HealthSummary = ({ bodyScores }: { bodyScores?: GetUserBodyScoresResponse[
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.title}>{bodyScores?.biologicalAge}</Text>
       <Text style={styles.subtitle}>Biological Age</Text>
       {ageDifference !== null && (
@@ -32,11 +32,6 @@ const HealthSummary = ({ bodyScores }: { bodyScores?: GetUserBodyScoresResponse[
 export default HealthSummary;
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    padding: Spacing.two,
-    borderRadius: Spacing.one,
-  },
   title: {
     fontSize: 32,
     color: Colors.dark.text,
